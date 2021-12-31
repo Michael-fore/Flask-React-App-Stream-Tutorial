@@ -14,7 +14,7 @@ Reposity for a youtube tutorial on how to run stream data from flask to react ap
 
 5. connect react app to stream
 
-Youtube Tutorial: https://youtu.be/En9vo7Ognm0
+Youtube Tutorial: https://youtu.be/rWIQLHp_JuU
 
 
 # Contact
