@@ -1,23 +1,36 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect,useState} from 'react'
 
 function App() {
+
+  const [data, setData] = useState('Initializing...')
+
+  useEffect(() => {
+    
+    const sse = new EventSource('/stream')
+
+    function handleStream(e){
+      console.log(e)
+      setData(e.data)
+    }
+
+    sse.onmessage = e =>{handleStream(e)}
+
+    sse.onerror = e => {
+      //GOTCHA - can close stream and 'stall'
+      sse.close()
+    }
+
+    return () => {
+      sse.close()
+      
+    }
+  }, )  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     The last streamed item was: {data}
     </div>
   );
 }
